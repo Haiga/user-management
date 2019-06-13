@@ -3,7 +3,7 @@
 	"description": "User with improved RBAC",
 	"autoload": {
 		"psr-4": {
-			"webvimark\\modules\\UserManagement\\": ""
+			"haiga\\modules\\UserManagement\\": ""
 		}
 	},
 	"require": {

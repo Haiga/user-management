@@ -28,23 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
 	<div class="panel panel-default">
 		<div class="panel-body">
 
-			<div class="row">
-				<div class="col-sm-6">
-					<p>
-						<?= GhostHtml::a(
-							'<span class="glyphicon glyphicon-plus-sign"></span> ' . UserManagementModule::t('back', 'Create'),
-							['/user-management/user/create'],
-							['class' => 'btn btn-success']
-						) ?>
-					</p>
-				</div>
-
-				<div class="col-sm-6 text-right">
-					<?= GridPageSize::widget(['pjaxId'=>'user-grid-pjax']) ?>
-				</div>
-			</div>
-
-
 			<?php Pjax::begin([
 				'id'=>'user-grid-pjax',
 			]) ?>

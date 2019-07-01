@@ -2,6 +2,8 @@
 
 namespace webvimark\modules\UserManagement\controllers;
 
+use app\models\Funcionario;
+use app\models\PessoaFisica;
 use webvimark\components\AdminDefaultController;
 use Yii;
 use webvimark\modules\UserManagement\models\User;
@@ -28,13 +30,28 @@ class UserController extends AdminDefaultController
 	 */
 	public function actionCreate()
 	{
+        $idFuncionario=Yii::$app->getSession()->get('idFuncionario');
 		$model = new User(['scenario'=>'newUser']);
+        $func = Funcionario::findOne(['id' => $idFuncionario]);
+        if (is_null($func)) {
+            Yii::$app->getSession()->setFlash('error','Funcionário inválido!');
+            return $this->redirect(['/']);
+        }else{
+            $pessoa = PessoaFisica::findOne(['id' => $func->pessoa_fisica_id]);
+            if (is_null($pessoa)) {
+                Yii::$app->getSession()->setFlash('error', 'Funcionário inválido!');
+                return $this->redirect(['/']);
+            }
+        }
 
-		if ( $model->load(Yii::$app->request->post()) && $model->save() )
+		if ( $model->load(Yii::$app->request->post()))
 		{
-			return $this->redirect(['view',	'id' => $model->id]);
+            $model->username = $pessoa->cpf;
+		    if($model->save()){
+                return $this->redirect(['view',	'id' => $model->id]);
+            }
 		}
-
+        $model->username = $pessoa->cpf;
 		return $this->renderIsAjax('create', compact('model'));
 	}
 

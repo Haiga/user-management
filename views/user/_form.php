@@ -5,6 +5,7 @@ use webvimark\modules\UserManagement\UserManagementModule;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use webvimark\extensions\BootstrapSwitch\BootstrapSwitch;
+use yii\helpers\Url;
 
 /**
  * @var yii\web\View $this
@@ -63,6 +64,7 @@ use webvimark\extensions\BootstrapSwitch\BootstrapSwitch;
 					['class' => 'btn btn-primary']
 				) ?>
 			<?php endif; ?>
+            <?= Html::a('SAIR', [Url::to('/')], ['class' => 'btn btn-default']) ?>
 		</div>
 	</div>
 

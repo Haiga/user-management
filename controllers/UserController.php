@@ -4,6 +4,7 @@ namespace webvimark\modules\UserManagement\controllers;
 
 use app\models\Funcionario;
 use app\models\PessoaFisica;
+use app\models\CdComplementares;
 use webvimark\components\AdminDefaultController;
 use Yii;
 use webvimark\modules\UserManagement\models\User;

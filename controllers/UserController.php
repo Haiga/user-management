@@ -49,8 +49,11 @@ class UserController extends AdminDefaultController
 		{
             $model->username = $pessoa->cpf;
 		    if($model->save()){
-		$funcao = CdComplementares::findOne(['id'=>$func->funcao]);
-                User::assignRole($model->getId(),$funcao->nome);
+			    $funcao = CdComplementares::findOne(['id'=>$func->funcao]);
+			    if(!is_null($funcao)){
+		            	User::assignRole($model->getId(),$funcao->nome);
+                	    }
+                
                 return $this->redirect(['view',	'id' => $model->id]);
             }
 		}

@@ -36,6 +36,9 @@ class LoginForm extends Model
     public function validateFuncionario()
     {
         $user = $this->getUser();
+        if(is_null($user)){
+            return false;
+        }
         if ($user->superadmin) {
             return true;
         }

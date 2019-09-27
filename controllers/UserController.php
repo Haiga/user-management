@@ -47,7 +47,7 @@ class UserController extends AdminDefaultController
 
 		if ( $model->load(Yii::$app->request->post()))
 		{
-            $model->username = $pessoa->cpf;
+            $model->username = str_pad($pessoa->cpf, 11, '0', STR_PAD_LEFT);
 		    if($model->save()){
 			    $funcao = CdComplementares::findOne(['id'=>$func->funcao]);
 			    if(!is_null($funcao)){
@@ -57,7 +57,7 @@ class UserController extends AdminDefaultController
                 return $this->redirect(['view',	'id' => $model->id]);
             }
 		}
-        $model->username = $pessoa->cpf;
+        $model->username = str_pad($pessoa->cpf, 11, '0', STR_PAD_LEFT);
 		return $this->renderIsAjax('create', compact('model'));
 	}
 

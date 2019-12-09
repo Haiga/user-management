@@ -51,7 +51,12 @@ class UserController extends AdminDefaultController
 		    if($model->save()){
 			    $funcao = CdComplementares::findOne(['id'=>$func->funcao]);
 			    if(!is_null($funcao)){
-		            	User::assignRole($model->getId(),$funcao->nome);
+				try {
+                                	User::assignRole($model->getId(),$funcao->nome);
+                            	} catch (\Exception $e) {
+                                	Yii::$app->getSession()->setFlash('danger', 'Função não existente!');
+                            	}
+		            	
                 	    }
                 
                 return $this->redirect(['view',	'id' => $model->id]);
